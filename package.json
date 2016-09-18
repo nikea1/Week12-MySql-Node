@@ -1,0 +1,24 @@
+{
+  "name": "week12-mysql-node",
+  "version": "1.0.0",
+  "description": "an app for testing knowlege of mysql and node",
+  "main": "BamazonCustomer.js",
+  "dependencies": {
+    "inquirer": "^1.1.3",
+    "mysql": "^2.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikea1/Week12-MySql-Node.git"
+  },
+  "author": "Adenike Adeyemi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikea1/Week12-MySql-Node/issues"
+  },
+  "homepage": "https://github.com/nikea1/Week12-MySql-Node#readme"
+}

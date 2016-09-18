@@ -41,13 +41,14 @@ function orderPrompt(){
 		connection.query(qStr,[user.id, user.quantity], function(err, rows){
 
 			if(rows.length > 0){
+
 				oldVal = rows[0].StockQuantity;
-				console.log(oldVal);
+				
 				var qStr2 = "UPDATE `Products` SET `StockQuantity` = ? WHERE `ItemID` = ?";
 				connection.query(qStr2,[oldVal - user.quantity, user.id], function(err, result){
-				if (err) throw err;
+					if (err) throw err;
 			 
-			  	console.log('changed ' + result.changedRows + ' rows');
+			  		console.log('changed ' + result.changedRows + ' rows');
 			})
 				
 			}
@@ -59,15 +60,7 @@ function orderPrompt(){
 			connection.end();
 
 		});
-		
-			
-			
-		
-
-		
-	})
-
-
+	});
 }
 
 connection.connect();
