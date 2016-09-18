@@ -36,16 +36,15 @@ function orderPrompt(){
 		console.log(user.id, user.quantity)
 
 		var oldVal;
-		var runTrans = false;
 		var qStr = "SELECT `ItemID`,`StockQuantity` FROM `Products` WHERE `ItemID` = ? AND `StockQuantity` >= ?";
 		connection.query(qStr,[user.id, user.quantity], function(err, rows){
 
 			if(rows.length > 0){
 
-				oldVal = rows[0].StockQuantity;
+				oldVal = parseInt(rows[0].StockQuantity);
 				
 				var qStr2 = "UPDATE `Products` SET `StockQuantity` = ? WHERE `ItemID` = ?";
-				connection.query(qStr2,[oldVal - user.quantity, user.id], function(err, result){
+				connection.query(qStr2,[oldVal - parseInt(user.quantity), user.id], function(err, result){
 					if (err) throw err;
 			 
 			  		console.log('changed ' + result.changedRows + ' rows');
