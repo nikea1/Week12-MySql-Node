@@ -12,7 +12,9 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
+
 function viewProducts(){
+	//displays all items in database
 	var qStr = "SELECT * FROM `Products`";
 	connection.query(qStr,function(err, rows){
 
@@ -25,6 +27,7 @@ function viewProducts(){
 }
 
 function viewLowInventory(){
+	//display's all items in database with qty less than 5
 	var qStr = "SELECT * FROM `Products` WHERE `StockQuantity` < 5";
 	connection.query(qStr,function(err, rows){
 
@@ -36,6 +39,7 @@ function viewLowInventory(){
 	})
 }
 
+//adds increases amount of product existing in the inventory
 function addInventory(){
 
 	inquire.prompt([{
@@ -56,21 +60,20 @@ function addInventory(){
 
 	}]).then(function(user){
 
-		console.log(user.id, user.quantity)
 
 		var oldVal;
+		//finds item by id
 		var qStr = "SELECT `ItemID`,`StockQuantity` FROM `Products` WHERE `ItemID` = ?";
 		connection.query(qStr,[user.id], function(err, rows){
 			if(err){ 
 				console.log(err);
 				return err;
 			}
-			console.log(rows);
-			
+			//if id exists
 			if(rows.length > 0){
 
 				oldVal = parseInt(rows[0].StockQuantity);
-				
+				//update amount of items in inventory
 				var qStr2 = "UPDATE `Products` SET `StockQuantity` = ? WHERE `ItemID` = ?";
 				connection.query(qStr2,[oldVal + parseInt(user.quantity), user.id], function(err, result){
 					if (err) throw err;
@@ -129,6 +132,7 @@ function addProduct(){
 
 
 		var oldVal;
+		//inserts new item into products table
 		var qStr = "INSERT INTO `Products` SET ?";
 		var values = {
 						ProductName : user.product, 
@@ -153,6 +157,7 @@ function addProduct(){
 
 }
 
+//run Manager prompt
 inquire.prompt(
 	[
 		{
